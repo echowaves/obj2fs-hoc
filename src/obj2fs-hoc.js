@@ -12,7 +12,7 @@ const Obj2fsHOC = WrappedObject => class extends Json2ObjHOC(WrappedObject) {
 
   /* retreive object from fs, key === file_name */
   static retreive(key) {
-    return obj = WrappedObject.parse(fs.readFileSync(path.resolve(key)))
+    return this.parse(fs.readFileSync(path.resolve(key)))
   }
 
   /* retreive object from fs, key === file_name, or return new Object initialized with default constructor() */
@@ -25,6 +25,7 @@ const Obj2fsHOC = WrappedObject => class extends Json2ObjHOC(WrappedObject) {
     } else {
         obj = retreive(key)
     }
+    return obj
   }
 }
 
