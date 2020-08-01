@@ -1,0 +1,37 @@
+{
+  "name": "obj2fs-hoc",
+  "version": "1.0.0",
+  "description": "Higher-Order Component that adds ability for object to be stored on fs",
+  "main": "lib/obj2fs-hoc.js",
+  "scripts": {
+    "prepublish": "babel src --out-dir lib",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/echowaves/obj2fs-hoc.git"
+  },
+  "keywords": [
+    "persist",
+    "storage",
+    "file system",
+    "HOC"
+  ],
+  "author": "Dmitry Amelchenko <dmitry@echowaves.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/echowaves/obj2fs-hoc/issues"
+  },
+  "homepage": "https://github.com/echowaves/obj2fs-hoc#readme",
+  "dependencies": {
+    "fs-extra": "9.0.1",
+    "json2obj-hoc": "1.0.7"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.10.5",
+    "@babel/core": "7.10.5",
+    "@babel/plugin-proposal-class-properties": "7.10.4",
+    "@babel/preset-env": "7.10.4",
+    "jest": "26.1.0"
+  }
+}
