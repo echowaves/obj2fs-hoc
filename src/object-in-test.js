@@ -1,4 +1,5 @@
 import Obj2fsHOC from './obj2fs-hoc'
+import Json2ObjHOC from 'json2obj-hoc'
 
 class ObjectInTest {
   // have to make publicKey optional for json2Obj HOC to work

@@ -21,33 +21,50 @@ describe('ObjectInTest', () => {
     })
   })
 
-  describe('objectInTest.retreive()', () => {
+  describe('objectInTest.retrieve()', () => {
     beforeEach(() => {
-        objectInTest.store(key)
+      objectInTest.incProp2()
+      objectInTest.store(key)
     })
 
-    it('should retreive file  named `key`', () => {
-      const retreivedObject = ObjectInTest.retreive(key)
-
-      expect(retreivedObject.constructor.name).toBe("ObjectInTest")
-      // const jsonObjectInTest = objectInTest.store(key)
-      // expect(fs.existsSync(key)).toBe(true)
+    it('should retrieve file named `key`', () => {
+      const retrievedObject = new ObjectInTest().retrieve(key)
+      expect(retrievedObject.constructor.name).toBe("ObjectInTest")
+      expect(retrievedObject.prop1).toBe('')
+      expect(retrievedObject.prop2).toBe(3) // this value is different from default and should be retrieved from file
+      expect(retrievedObject.prop3).toBe('three')
+      retrievedObject.incProp2() // test if object contains methods that correspond to type object type
+      expect(retrievedObject.prop2).toBe(4)
+    })
+    it('should fail to retrieve file  that does not exist', () => {
+      fs.removeSync(`${key}-non_existing_key`)
+      expect(() => {
+        new ObjectInTest().retrieve('non_existing_key')
+      }).toThrowError('No such key or file name found on disk')
     })
   })
 
-  describe('ObjectInTest.parse()', () => {
-    it('should generate an `ObjectInTest` instance from JSON', () => {
-      const jsonObjectInTest = objectInTest.stringify()
-      const generatedObjectInTest = ObjectInTest.parse(jsonObjectInTest)
-      expect(generatedObjectInTest).toMatchObject(objectInTest)
-      // check if the loaded object responds to methods calls after re-construction from JSON
-      generatedObjectInTest.incProp2()
-      expect(generatedObjectInTest.prop2).toEqual(3)
+  describe('ObjectInTest.retrieveOrNew()', () => {
+    beforeEach(() => {
+        objectInTest.store(key)
     })
-    it('should fail to generate an `ObjectInTest` object from wrong JSON', () => {
-      expect(() => {
-        ObjectInTest.parse('{ some: json }')
-      }).toThrowError('Unexpected token s in JSON at position 2')
+    it('should retrieve file named `key`', () => {
+      const retrievedObject = new ObjectInTest().retrieveOrNew(key)
+      expect(retrievedObject.constructor.name).toBe("ObjectInTest")
+      expect(retrievedObject.prop1).toBe('')
+      expect(retrievedObject.prop2).toBe(2)
+      expect(retrievedObject.prop3).toBe('three')
+      retrievedObject.incProp2() // test if object contains methods that correspond to type object type
+      expect(retrievedObject.prop2).toBe(3)
+    })
+    it('should create new instance when file does not exist', () => {
+      fs.removeSync(`${key}-non_existing_key`)
+      const newObjects = new ObjectInTest().retrieveOrNew(`${key}-non_existing_key`)
+      expect(newObjects.prop1).toBe('')
+      expect(newObjects.prop2).toBe(2)
+      expect(newObjects.prop3).toBe('three')
+      newObjects.incProp2() // test if object contains methods that correspond to type object type
+      expect(newObjects.prop2).toBe(3)
     })
   })
 })
