@@ -1,5 +1,5 @@
 # obj2fs-hoc
-Higher-Order Component that adds ability for object to be stored on FileSytem by key as a JSON file, and late retrieved as Object of correct type.
+Higher-Order Component that adds ability for object to be stored on FileSytem by key as a JSON file, and later retrieved as Object of correct type.
 
 ## Usage
 
