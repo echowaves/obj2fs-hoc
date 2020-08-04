@@ -25,7 +25,7 @@
   "homepage": "https://github.com/echowaves/obj2fs-hoc#readme",
   "dependencies": {
     "fs-extra": "9.0.1",
-    "json2obj-hoc": "1.1.1"
+    "json2obj-hoc": "1.1.4"
   },
   "devDependencies": {
     "@babel/cli": "7.10.5",
