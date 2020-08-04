@@ -9,19 +9,25 @@ describe('ObjectInTest', () => {
     objectInTest = new ObjectInTest()
   })
 
-  describe('objectInTest.store()', () => {
+  describe('objectInTest.store(key)', () => {
     beforeEach(() => {
       fs.removeSync(path.resolve(key))
     })
 
     it('should generate file with `key`', () => {
       expect(fs.existsSync(key)).toBe(false)
-      const jsonObjectInTest = objectInTest.store(key)
+      objectInTest.store(key)
       expect(fs.existsSync(key)).toBe(true)
     })
+    it('should return json string', () => {
+      expect(fs.existsSync(key)).toBe(false)
+      const jsonObjectInTest = objectInTest.store(key)
+      expect(typeof jsonObjectInTest).toBe('string')
+      expect('{"prop1":"","prop2":2,"prop3":"three"}')
+        .toEqual(jsonObjectInTest) })
   })
 
-  describe('objectInTest.retrieve()', () => {
+  describe('objectInTest.retrieve(key)', () => {
     beforeEach(() => {
       objectInTest.incProp2()
       objectInTest.store(key)
@@ -44,7 +50,7 @@ describe('ObjectInTest', () => {
     })
   })
 
-  describe('ObjectInTest.retrieveOrNew()', () => {
+  describe('ObjectInTest.retrieveOrNew(key)', () => {
     beforeEach(() => {
       objectInTest.store(key)
     })
