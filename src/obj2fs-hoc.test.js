@@ -11,7 +11,7 @@ describe('ObjectInTest', () => {
 
   describe('objectInTest.store()', () => {
     beforeEach(() => {
-        fs.removeSync(path.resolve(key))
+      fs.removeSync(path.resolve(key))
     })
 
     it('should generate file with `key`', () => {
@@ -46,7 +46,7 @@ describe('ObjectInTest', () => {
 
   describe('ObjectInTest.retrieveOrNew()', () => {
     beforeEach(() => {
-        objectInTest.store(key)
+      objectInTest.store(key)
     })
     it('should retrieve file named `key`', () => {
       const retrievedObject = new ObjectInTest().retrieveOrNew(key)

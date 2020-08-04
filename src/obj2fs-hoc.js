@@ -14,7 +14,6 @@ const Obj2fsHOC = WrappedObject => class extends Json2ObjHOC(WrappedObject) {
   /* retrieve object from fs, key === file_name */
   retrieve(key) {
     if (!fs.existsSync(path.resolve(key))) {
-      console.log('throwing')
       throw new Error('No such key or file name found on disk')
     }
     return this.parse(fs.readFileSync(path.resolve(key)))
