@@ -34,10 +34,7 @@ Wrapping ```Account``` with ```Obj2fsHOC``` adds 3 methods to ```Account``` type
 
 and
 
-```retrieve(key)``` which loads object instance of correct type from disk. If the file is not found it will throw exception.
-```js
-throw new Error('No such key or file name found on disk')
-```
+```retrieve(key)``` which loads object instance of correct type from disk. If the file is not found it will throw exception.```throw new Error('No such key or file name found on disk')```
 
 and
 

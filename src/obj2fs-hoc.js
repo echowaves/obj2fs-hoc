@@ -8,8 +8,7 @@ const Obj2fsHOC = WrappedObject => class extends Json2ObjHOC(WrappedObject) {
   /* store object in fs, key === file_name */
   store(key) {
     const json = this.stringify()
-    fs.ensureFileSync(path.resolve(key))
-    fs.writeFileSync(path.resolve(key), json)
+    fs.outputFileSync(path.resolve(key), json)
     return json
   }
 
@@ -25,8 +24,7 @@ const Obj2fsHOC = WrappedObject => class extends Json2ObjHOC(WrappedObject) {
   retrieveOrNew(key) {
     let obj
     if (!fs.existsSync(path.resolve(key))) {
-
-      fs.writeFileSync(path.resolve(key), this.stringify())
+      fs.outputFileSync(path.resolve(key), this.stringify())
     }
     obj = this.parse(fs.readFileSync(path.resolve(key)))
 
