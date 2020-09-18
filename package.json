@@ -1,6 +1,6 @@
 {
 	"name": "obj2fs-hoc",
-	"version": "1.2.0",
+	"version": "1.2.1",
 	"description": "Higher-Order Component that adds ability for object to be persisted.",
 	"main": "lib/obj2fs-hoc.js",
 	"scripts": {
