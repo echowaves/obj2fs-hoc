@@ -5,6 +5,12 @@ const fs = require('fs-extra')
 
 const Obj2fsHOC = WrappedObject => class extends Json2ObjHOC(WrappedObject) {
 
+  /* must call this function to attach object to store by key */
+  setKey(KEY) {
+    this.KEY = KEY
+    return this
+  }
+
   /* store object in fs, key === file_name */
   store(key) {
     const json = this.stringify()
