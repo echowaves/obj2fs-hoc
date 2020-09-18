@@ -44,7 +44,7 @@ const Obj2fsHOC = WrappedObject => class extends WrappedObject {
   /*  retrieve object from fs, key === file_name, or return new Object initialized with default constructor() */
   retrieveOrNew() {
     if (!fs.existsSync(path.resolve(this.key))) {
-      fs.outputFileSync(path.resolve(this.key), this.stringify())
+      this.store()
     }
     return this.parse(fs.readFileSync(path.resolve(this.key)))
   }
