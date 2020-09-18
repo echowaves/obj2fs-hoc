@@ -3478,11 +3478,6 @@ json-stringify-safe@~5.0.1:
   resolved "https://registry.yarnpkg.com/json-stringify-safe/-/json-stringify-safe-5.0.1.tgz#1296a2d58fd45f19a0f6ce01d65701e2c735b6eb"
   integrity sha1-Epai1Y/UXxmg9s4B1lcB4sc1tus=
 
-json2obj-hoc@1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/json2obj-hoc/-/json2obj-hoc-1.2.0.tgz#e9d9682a7828656f5bb7d0b3db40fac00094ff14"
-  integrity sha512-rYMNsZXoSyTj1cLQq26hl4NKO5hXWtH5kPJpq+S7cZxb9N52Ijrk2ZNxe++e5+Ayarmb7zqsvAKZrON3yHwNiw==
-
 json5@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/json5/-/json5-1.0.1.tgz#779fb0018604fa854eacbf6252180d83543e3dbe"
