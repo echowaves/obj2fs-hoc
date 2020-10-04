@@ -24,29 +24,31 @@ const Obj2fsHOC = WrappedObject => class extends WrappedObject {
   }
 
   /* store object in fs, key === file_name */
-  store() {
+  async store() {
     const key = this.key
     delete this.key // key is transitent property, let's clear it before persisting to fs
     const string = this.stringify()
-    fs.outputFileSync(path.resolve(key), string)
+    await fs.outputFile(path.resolve(key), string)
     this.key = key
     return string
   }
 
   /* retrieve object from fs, key === file_name */
-  retrieve() {
+  async retrieve() {
     if (!fs.existsSync(path.resolve(this.key))) {
-      throw new Error('No such key or file name found on disk')
+      throw new Error("No such key or file name found on disk")
     }
-    return this.parse(fs.readFileSync(path.resolve(this.key)))
+    const json = await fs.readFile(path.resolve(this.key))
+    return this.parse(json)
   }
 
   /*  retrieve object from fs, key === file_name, or return new Object initialized with default constructor() */
-  retrieveOrNew() {
+  async retrieveThrough() {
     if (!fs.existsSync(path.resolve(this.key))) {
-      this.store()
+      await this.store()
     }
-    return this.parse(fs.readFileSync(path.resolve(this.key)))
+    const json = await fs.readFile(path.resolve(this.key))
+    return this.parse(json)
   }
 }
 
