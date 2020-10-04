@@ -1,5 +1,5 @@
 # obj2fs-hoc
-Higher-Order Component that adds ability for object to be stored on FileSytem by key as a JSON file, and later retrieved as Object of correct type.
+Higher-Order Component that adds ability for object to be stored on FileSystem by key as a JSON file, and later retrieved as Object of correct type.
 
 ## Usage
 
@@ -28,39 +28,41 @@ class Account {
 
 export default Obj2fsHOC(Account) // enhancing Account
 ```
-Wrapping ```Account``` with ```Obj2fsHOC``` adds 3 methods to ```Account``` type.
+Wrapping ```Account``` with ```Obj2fsHOC``` adds some methods to ```Account``` type.
 
-```store(key)``` which saves `this` object as JSON string to disk with name `key`. It will create the file if it does not exist.
+```setKey(key)``` which associates unique key with an instance of an object.
 
-and
-
-```retrieve(key)``` which loads object instance of correct type from disk. If the file is not found it will throw exception.```throw new Error('No such key or file name found on disk')```
+```async store()``` which saves `this` object as JSON string to disk with name `key`. It will create the file if it does not exist.
 
 and
 
-```retrieveOrNew(key)``` which loads object instance of correct type from disk. If the file is not found it will create a new file contents of an object initialized with default constructor and then return it. This method should never fail.
+```async retrieve()``` which loads object instance of correct type from disk. If the file is not found it will throw exception.```throw new Error('No such key or file name found on disk')```
+
+and
+
+```retrieveretrieveThrough()``` which loads object instance of correct type from disk. If the file is not found it will create a new file contents of an object initialized with default constructor and then return it. This method should never fail.
 
 Here are examples how to use the ```Account``` object:
 
 ```js
 import Account from './account'
 
-let account = new Account({ publicKey: 'some public key' }) // constructor with required parameter
-const amount = 100
-account.addBalance({ amount })
+async () => {
+	let account = new Account({ publicKey: 'some public key' }) // constructor with required parameter
+	const amount = 100
+	account.addBalance({ amount })
 
-const key = 'myAccount.json'
+	const key = 'myAccount.json'
+	account.setKey(key)
 
-const jsonAccount = account.store(key)
-// jsonAccount will be saved to disk as JSON string
+	const jsonAccount = await account.store()
+	// jsonAccount will be saved to disk as JSON string
 
-// now let's re-created another instance of the Account object from file on disk
-const generatedAccount = new Account().retrieve(key)
-// can still call the addBalance method, because the object is of the right type
-generatedAccount.addBalance({ amount })
+	// now let's re-created another instance of the Account object from file on disk
+	const generatedAccount = await (new Account().setKey(key)).retrieve()
+	// can still call the addBalance method, because the object is of the right type
+	generatedAccount.addBalance({ amount })
 
-console.log(generatedAccount.balance) // ----> 200
+	console.log(generatedAccount.balance) // ----> 200
+}
 ```
-
-## Future
-Currently only synch version is supported. There are plans to include asynch methods at some point.
